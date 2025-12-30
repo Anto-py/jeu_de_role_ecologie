@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comité d'Éthique : IA et Écologie</title>
+    <style>
+        /* === PALETTE RETROFUTURISME === */
+        :root {
+            --retro-teal: #127676;
+            --retro-orange: #E4632E;
+            --retro-jaune: #E3A535;
+            --retro-ink: #0D1617;
+            --retro-paper: #F2EFE6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--retro-ink);
+            color: var(--retro-ink);
+            line-height: 1.6;
+            padding: 12px;
+        }
+
+        /* === CADRE DE PAGE ART NOUVEAU === */
+        .page-frame {
+            background: var(--retro-paper);
+            border: 4px solid var(--retro-orange);
+            position: relative;
+            min-height: calc(100vh - 24px);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Motifs floraux aux coins */
+        .corner-flourish {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--retro-teal);
+            opacity: 0.6;
+            line-height: 1;
+        }
+        .corner-flourish.top-left { top: 12px; left: 12px; }
+        .corner-flourish.top-right { top: 12px; right: 12px; }
+        .corner-flourish.bottom-left { bottom: 12px; left: 12px; }
+        .corner-flourish.bottom-right { bottom: 12px; right: 12px; }
+
+        /* === TYPOGRAPHIE === */
+        h1 {
+            font-family: Impact, 'Anton', 'Oswald', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--retro-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: Impact, 'Anton', 'Oswald', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: var(--retro-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h3 {
+            font-family: Impact, 'Anton', sans-serif;
+            font-size: 1.1rem;
+            color: var(--retro-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 1rem 0 0.5rem;
+        }
+
+        /* === SÉPARATEUR ART NOUVEAU === */
+        .retro-separator {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 30px 0;
+            color: var(--retro-teal);
+        }
+
+        .retro-separator::before,
+        .retro-separator::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--retro-teal) 20%,
+                var(--retro-teal) 80%,
+                transparent
+            );
+        }
+
+        .retro-separator .flourish {
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        /* === BOUTONS PILL === */
+        .retro-btn-pill {
+            display: inline-flex;
+            border-radius: 50px;
+            border: 3px solid var(--retro-teal);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(13, 22, 23, 0.15);
+            text-decoration: none;
+            margin: 8px 4px;
+            background: none;
+        }
+
+        .retro-btn-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(13, 22, 23, 0.25);
+        }
+
+        .retro-btn-pill-text {
+            background: var(--retro-jaune);
+            color: var(--retro-ink);
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .retro-btn-pill-icon {
+            background: var(--retro-orange);
+            color: var(--retro-paper);
+            width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* === CARTES DE RÔLES === */
+        .role-card {
+            background: var(--retro-paper);
+            border: 3px solid var(--retro-teal);
+            border-radius: 24px 8px 24px 8px;
+            box-shadow: inset 0 0 0 2px var(--retro-orange);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        .role-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.3rem;
+        }
+
+        .role-icon {
+            font-size: 1.8rem;
+        }
+
+        .role-profil {
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(227, 165, 53, 0.15);
+            border-left: 4px solid var(--retro-jaune);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .role-objectif {
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(228, 99, 46, 0.15);
+            border-left: 4px solid var(--retro-orange);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .role-arguments {
+            margin: 16px 0;
+        }
+
+        .role-arguments ul {
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .role-arguments li {
+            margin: 8px 0;
+        }
+
+        .role-ligne-rouge {
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(18, 118, 118, 0.1);
+            border-left: 4px solid var(--retro-teal);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* === CONTEXTE ET MISSION === */
+        .context-box {
+            background: var(--retro-paper);
+            border: 3px solid var(--retro-teal);
+            border-radius: 16px 4px 16px 4px;
+            box-shadow: inset 0 0 0 2px var(--retro-orange);
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .mission-box {
+            background: rgba(227, 165, 53, 0.15);
+            border: 3px solid var(--retro-jaune);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* === TIMER === */
+        .timer-container {
+            background: var(--retro-ink);
+            color: var(--retro-paper);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 20px 0;
+            border: 3px solid var(--retro-orange);
+        }
+
+        .timer-display {
+            font-family: Impact, monospace;
+            font-size: 3rem;
+            color: var(--retro-jaune);
+            margin: 10px 0;
+            letter-spacing: 0.1em;
+        }
+
+        .timer-phase {
+            font-size: 1.1rem;
+            color: var(--retro-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* === PROPOSITIONS DE VOTE === */
+        .vote-options {
+            margin: 20px 0;
+        }
+
+        .vote-option {
+            background: var(--retro-paper);
+            border: 3px solid var(--retro-teal);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .vote-option:hover {
+            background: rgba(18, 118, 118, 0.1);
+            transform: translateX(4px);
+        }
+
+        .vote-option.selected {
+            background: rgba(227, 165, 53, 0.2);
+            border-color: var(--retro-orange);
+            box-shadow: inset 0 0 0 2px var(--retro-jaune);
+        }
+
+        .vote-option strong {
+            color: var(--retro-orange);
+            font-size: 1.1rem;
+        }
+
+        /* === DÉBRIEFING === */
+        .debrief-section {
+            margin: 30px 0;
+        }
+
+        .debrief-question {
+            background: rgba(18, 118, 118, 0.1);
+            border-left: 4px solid var(--retro-teal);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        /* === NAVIGATION === */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        /* === SECTIONS === */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* === GÉNÉRATION DE LIENS === */
+        .links-generator {
+            background: var(--retro-ink);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
+            padding: 12px;
+            background: var(--retro-paper);
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+
+        .link-item .role-name {
+            font-weight: 600;
+            color: var(--retro-teal);
+            min-width: 200px;
+        }
+
+        .link-item input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 12px;
+            border: 2px solid var(--retro-teal);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: var(--retro-paper);
+        }
+
+        .copy-btn {
+            background: var(--retro-orange);
+            color: var(--retro-paper);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--retro-teal);
+        }
+
+        .copy-btn.copied {
+            background: var(--retro-teal);
+        }
+
+        /* === QR CODE MODAL === */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 22, 23, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .qr-modal.active {
+            display: flex;
+        }
+
+        .qr-content {
+            background: var(--retro-paper);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            border: 4px solid var(--retro-orange);
+        }
+
+        .qr-content canvas {
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            .page-frame {
+                padding: 16px;
+            }
+
+            .retro-btn-pill-text {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .retro-btn-pill-icon {
+                width: 48px;
+            }
+
+            .timer-display {
+                font-size: 2rem;
+            }
+
+            .corner-flourish {
+                font-size: 1.5rem;
+            }
+
+            .link-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .link-item input {
+                width: 100%;
+            }
+        }
+
+        /* === INSTRUCTIONS === */
+        .instruction {
+            background: rgba(227, 165, 53, 0.15);
+            border: 2px solid var(--retro-jaune);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 0.95rem;
+        }
+
+        /* === ALERTE SECRET === */
+        .secret-banner {
+            background: var(--retro-orange);
+            color: var(--retro-paper);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* === ÉCRAN DE CHARGEMENT RÔLE === */
+        .role-reveal {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .role-reveal h2 {
+            margin-bottom: 20px;
+        }
+
+        /* === LISTE DE PARTAGE === */
+        .share-methods {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 2px solid var(--retro-teal);
+            background: var(--retro-paper);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .share-btn:hover {
+            background: var(--retro-teal);
+            color: var(--retro-paper);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-frame">
+        <!-- Motifs floraux Art Nouveau -->
+        <div class="corner-flourish top-left">❀</div>
+        <div class="corner-flourish top-right">✿</div>
+        <div class="corner-flourish bottom-left">❁</div>
+        <div class="corner-flourish bottom-right">✾</div>
+
+        <!-- === SECTION ANIMATEUR : INTRODUCTION === -->
+        <section id="intro" class="section">
+            <h1>Comité d'Éthique</h1>
+            <h2>IA et Écologie</h2>
+
+            <div class="context-box">
+                <h3>🌍 Contexte</h3>
+                <p><strong>Votre établissement de formation</strong> doit voter un règlement sur l'usage de l'IA.</p>
+                <p>Un rapport vient de révéler que :</p>
+                <ul style="margin: 12px 0 12px 20px;">
+                    <li>Une requête ChatGPT consomme <strong>10x plus d'énergie</strong> qu'une recherche Google</li>
+                    <li>Les datacenters IA consomment autant d'eau qu'<strong>une petite ville</strong></li>
+                    <li>La formation de GPT-4 a généré <strong>50x les émissions de CO₂</strong> d'une voiture sur toute sa vie</li>
+                </ul>
+            </div>
+
+            <div class="mission-box">
+                <h3>🎯 Votre Mission</h3>
+                <p>En tant que <strong>comité d'éthique</strong>, vous avez <strong>20 minutes</strong> pour décider collectivement des règles d'usage de l'IA dans l'établissement, en tenant compte de l'impact écologique.</p>
+            </div>
+
+            <div class="instruction">
+                <strong>Durée totale :</strong> 25-30 minutes<br>
+                <strong>Participants :</strong> 6 personnes (ou adapter les rôles)<br>
+                <strong>Format :</strong> Jeu de rôles avec objectifs secrets
+            </div>
+
+            <div class="nav-buttons">
+                <button class="retro-btn-pill" onclick="showSection('distribution')">
+                    <span class="retro-btn-pill-text">Distribuer les rôles</span>
+                    <span class="retro-btn-pill-icon">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- === SECTION ANIMATEUR : DISTRIBUTION === -->
+        <section id="distribution" class="section">
+            <h1>Distribution des Rôles</h1>
+
+            <div class="retro-separator">
+                <span class="flourish">❧</span>
+            </div>
+
+            <div class="instruction">
+                <strong>🔗 Mode opératoire :</strong><br>
+                1. Générez les liens ci-dessous<br>
+                2. Envoyez UN lien unique à chaque participant (SMS, WhatsApp, email...)<br>
+                3. Chaque personne découvre UNIQUEMENT son rôle et son objectif secret
+            </div>
+
+            <div class="links-generator">
+                <h3 style="color: var(--retro-paper); margin-bottom: 16px;">📎 Liens individuels</h3>
+                
+                <div class="link-item">
+                    <span class="role-name">🎓 L'étudiant·e en difficulté</span>
+                    <input type="text" id="link-1" readonly>
+                    <button class="copy-btn" onclick="copyLink(1)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(1)">QR</button>
+                </div>
+
+                <div class="link-item">
+                    <span class="role-name">🌱 L'écolo convaincu·e</span>
+                    <input type="text" id="link-2" readonly>
+                    <button class="copy-btn" onclick="copyLink(2)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(2)">QR</button>
+                </div>
+
+                <div class="link-item">
+                    <span class="role-name">👩‍🏫 Le/la prof pragmatique</span>
+                    <input type="text" id="link-3" readonly>
+                    <button class="copy-btn" onclick="copyLink(3)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(3)">QR</button>
+                </div>
+
+                <div class="link-item">
+                    <span class="role-name">💻 Le/la geek optimiste</span>
+                    <input type="text" id="link-4" readonly>
+                    <button class="copy-btn" onclick="copyLink(4)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(4)">QR</button>
+                </div>
+
+                <div class="link-item">
+                    <span class="role-name">👔 Le/la responsable d'établissement</span>
+                    <input type="text" id="link-5" readonly>
+                    <button class="copy-btn" onclick="copyLink(5)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(5)">QR</button>
+                </div>
+
+                <div class="link-item">
+                    <span class="role-name">😐 L'étudiant·e lambda</span>
+                    <input type="text" id="link-6" readonly>
+                    <button class="copy-btn" onclick="copyLink(6)">Copier</button>
+                    <button class="copy-btn" onclick="showQR(6)">QR</button>
+                </div>
+            </div>
+
+            <div class="instruction">
+                ⏱️ <strong>Temps de lecture :</strong> 3 minutes pour que chacun·e découvre et s'approprie son rôle sur son appareil.
+            </div>
+
+            <div class="nav-buttons">
+                <button class="retro-btn-pill" onclick="showSection('intro')">
+                    <span class="retro-btn-pill-text">← Retour</span>
+                    <span class="retro-btn-pill-icon">←</span>
+                </button>
+                <button class="retro-btn-pill" onclick="showSection('debat')">
+                    <span class="retro-btn-pill-text">Lancer le débat</span>
+                    <span class="retro-btn-pill-icon">▶</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- === SECTION PARTICIPANT : MON RÔLE === -->
+        <section id="mon-role" class="section">
+            <h1>Ton Rôle Secret</h1>
+
+            <div class="secret-banner">
+                🤫 NE MONTRE PAS CET ÉCRAN AUX AUTRES PARTICIPANTS !
+            </div>
+
+            <div id="role-container">
+                <!-- Le rôle sera injecté ici par JavaScript -->
+            </div>
+
+            <div class="context-box" style="margin-top: 30px;">
+                <h3>🌍 Rappel du contexte</h3>
+                <p>Votre établissement doit voter un règlement sur l'usage de l'IA. Un rapport révèle que :</p>
+                <ul style="margin: 12px 0 12px 20px;">
+                    <li>Une requête ChatGPT = <strong>10x plus d'énergie</strong> qu'une recherche Google</li>
+                    <li>Les datacenters IA = consommation d'eau d'<strong>une petite ville</strong></li>
+                </ul>
+            </div>
+
+            <div class="instruction">
+                <strong>Consignes :</strong><br>
+                • Présente-toi aux autres SANS révéler ton objectif secret<br>
+                • Défends ta position avec les arguments fournis<br>
+                • Tu peux négocier, mais respecte ta ligne rouge !
+            </div>
+        </section>
+
+        <!-- === SECTION ANIMATEUR : DÉBAT === -->
+        <section id="debat" class="section">
+            <h1>Phase de Débat</h1>
+
+            <div class="timer-container">
+                <div class="timer-phase" id="phase-label">Tour de table</div>
+                <div class="timer-display" id="timer">20:00</div>
+                <div style="margin-top: 16px;">
+                    <button class="retro-btn-pill" onclick="startTimer()">
+                        <span class="retro-btn-pill-text">Démarrer</span>
+                        <span class="retro-btn-pill-icon">▶</span>
+                    </button>
+                    <button class="retro-btn-pill" onclick="pauseTimer()">
+                        <span class="retro-btn-pill-text">Pause</span>
+                        <span class="retro-btn-pill-icon">⏸</span>
+                    </button>
+                    <button class="retro-btn-pill" onclick="resetTimer()">
+                        <span class="retro-btn-pill-text">Reset</span>
+                        <span class="retro-btn-pill-icon">↻</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="retro-separator">
+                <span class="flourish">✿</span>
+            </div>
+
+            <h2>Déroulé</h2>
+
+            <div class="debrief-section">
+                <div class="debrief-question">
+                    <h3>Phase 1 : Tour de table (5 min)</h3>
+                    <p>Chaque participant se présente en 30 secondes :</p>
+                    <ul style="margin-left: 20px;">
+                        <li>Ton rôle (sans révéler ton objectif secret)</li>
+                        <li>Ta première réaction spontanée à la situation</li>
+                    </ul>
+                </div>
+
+                <div class="debrief-question">
+                    <h3>Phase 2 : Débat ouvert (13 min)</h3>
+                    <p><strong>L'animateur·ice lance des questions provocantes :</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>"Faut-il interdire l'IA dans l'établissement ?"</li>
+                        <li>"Qui est responsable : les utilisateurs ou les entreprises ?"</li>
+                        <li>"Peut-on limiter l'usage ? Comment ?"</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Règle du jeu :</strong> Rester dans son personnage, défendre ses intérêts, mais chercher un compromis collectif.</p>
+                </div>
+
+                <div class="debrief-question">
+                    <h3>Phase 3 : Vote (2 min)</h3>
+                    <p>Le comité doit voter pour UNE proposition ou en créer une nouvelle.</p>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="retro-btn-pill" onclick="showSection('distribution')">
+                    <span class="retro-btn-pill-text">← Rôles</span>
+                    <span class="retro-btn-pill-icon">←</span>
+                </button>
+                <button class="retro-btn-pill" onclick="showSection('vote')">
+                    <span class="retro-btn-pill-text">Passer au vote</span>
+                    <span class="retro-btn-pill-icon">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- === SECTION ANIMATEUR : VOTE === -->
+        <section id="vote" class="section">
+            <h1>Temps de Décision</h1>
+
+            <div class="retro-separator">
+                <span class="flourish">❁</span>
+            </div>
+
+            <h2>Votez pour UNE proposition</h2>
+
+            <div class="vote-options">
+                <div class="vote-option" onclick="selectVote(this, 'A')">
+                    <strong>A. Interdiction totale</strong> de l'IA sauf dérogation médicale<br>
+                    <small>→ Approche radicale écologique</small>
+                </div>
+
+                <div class="vote-option" onclick="selectVote(this, 'B')">
+                    <strong>B. Quota individuel</strong> (ex: 10 requêtes/jour maximum)<br>
+                    <small>→ Régulation par la limitation</small>
+                </div>
+
+                <div class="vote-option" onclick="selectVote(this, 'C')">
+                    <strong>C. Usage autorisé</strong> mais obligation de compenser (planter des arbres, etc.)<br>
+                    <small>→ Responsabilité collective</small>
+                </div>
+
+                <div class="vote-option" onclick="selectVote(this, 'D')">
+                    <strong>D. Liberté totale</strong> + sensibilisation à l'impact<br>
+                    <small>→ Éducation sans contrainte</small>
+                </div>
+            </div>
+
+            <div class="instruction">
+                <strong>💡 Option 5 :</strong> Le groupe peut créer sa propre proposition si aucune ne convient !
+            </div>
+
+            <div id="vote-result" style="display: none; margin: 20px 0; padding: 20px; background: rgba(227, 165, 53, 0.2); border: 3px solid var(--retro-jaune); border-radius: 12px; text-align: center;">
+                <h3 style="margin: 0;">Proposition choisie : <span id="chosen-vote"></span></h3>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="retro-btn-pill" onclick="showSection('debat')">
+                    <span class="retro-btn-pill-text">← Débat</span>
+                    <span class="retro-btn-pill-icon">←</span>
+                </button>
+                <button class="retro-btn-pill" onclick="showSection('debrief')">
+                    <span class="retro-btn-pill-text">Débriefing</span>
+                    <span class="retro-btn-pill-icon">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- === SECTION ANIMATEUR : DÉBRIEFING === -->
+        <section id="debrief" class="section">
+            <h1>Débriefing</h1>
+
+            <div class="retro-separator">
+                <span class="flourish">✾</span>
+            </div>
+
+            <h2>Questions de réflexion</h2>
+
+            <div class="debrief-section">
+                <div class="debrief-question">
+                    <strong>1. Révélation des objectifs secrets</strong><br>
+                    Qui a réussi son objectif caché ? Quelles stratégies de négociation avez-vous utilisées ?
+                </div>
+
+                <div class="debrief-question">
+                    <strong>2. Sortie du rôle</strong><br>
+                    Si c'était ta vraie position, tu aurais voté pareil ? Quel écart entre tes croyances personnelles et le rôle joué ?
+                </div>
+
+                <div class="debrief-question">
+                    <strong>3. Question de gouvernance</strong><br>
+                    Dans la vraie vie, qui devrait décider : les élèves, les profs, l'État, les entreprises d'IA ?
+                </div>
+
+                <div class="debrief-question">
+                    <strong>4. Paradoxe final</strong><br>
+                    Vous venez de débattre 20 minutes... Combien auraient utilisé ChatGPT pour préparer leurs arguments si c'était autorisé ?
+                </div>
+            </div>
+
+            <div class="nav-buttons" style="margin-top: 40px;">
+                <button class="retro-btn-pill" onclick="showSection('intro')">
+                    <span class="retro-btn-pill-text">Recommencer</span>
+                    <span class="retro-btn-pill-icon">↻</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal QR Code -->
+    <div id="qr-modal" class="qr-modal" onclick="closeQR(event)">
+        <div class="qr-content" onclick="event.stopPropagation()">
+            <h3 id="qr-title">QR Code</h3>
+            <canvas id="qr-canvas"></canvas>
+            <p style="font-size: 0.9rem; color: var(--retro-teal);">Scannez pour ouvrir le rôle</p>
+            <button class="retro-btn-pill" onclick="closeQR()" style="margin-top: 16px;">
+                <span class="retro-btn-pill-text">Fermer</span>
+                <span class="retro-btn-pill-icon">✕</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- QR Code Library (embedded minimal version) -->
+    <script>
+        // Minimal QR Code generator
+        var QRCode=function(){function a(a){this.mode=c.MODE_8BIT_BYTE;this.data=a;this.parsedData=[];for(var b=0,e=this.data.length;b<e;b++){var f=[],d=this.data.charCodeAt(b);65536<d?(f[0]=240|(d&1835008)>>>18,f[1]=128|(d&258048)>>>12,f[2]=128|(d&4032)>>>6,f[3]=128|d&63):2048<d?(f[0]=224|(d&61440)>>>12,f[1]=128|(d&4032)>>>6,f[2]=128|d&63):128<d?(f[0]=192|(d&1984)>>>6,f[1]=128|d&63):f[0]=d;this.parsedData.push(f)}this.parsedData=Array.prototype.concat.apply([],this.parsedData);this.parsedData.length!=
+this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a;this.errorCorrectLevel=b;this.modules=null;this.moduleCount=0;this.dataCache=null;this.dataList=[]}function i(a,b){if(void 0==a.length)throw Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=Array(a.length-c+b);for(var e=0;e<a.length-c;e++)this.num[e]=a[e+c]}function r(a,b){this.totalCount=a;this.dataCount=b}function s(){this.buffer=[];
+this.length=0}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;b<c;b++)a.put(this.parsedData[b],8)}};b.prototype={addData:function(b){b=new a(b);this.dataList.push(b);this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,
+c){this.moduleCount=4*this.typeNumber+17;this.modules=Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++){this.modules[e]=Array(this.moduleCount);for(var f=0;f<this.moduleCount;f++)this.modules[e][f]=null}this.setupPositionProbePattern(0,0);this.setupPositionProbePattern(this.moduleCount-7,0);this.setupPositionProbePattern(0,this.moduleCount-7);this.setupPositionAdjustPattern();this.setupTimingPattern();this.setupTypeInfo(a,c);7<=this.typeNumber&&this.setupTypeNumber(a);null==this.dataCache&&
+(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList));this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var e=-1;7>=e;e++)-1>=b+e||this.moduleCount<=b+e||(this.modules[a+c][b+e]=0<=c&&6>=c&&(0==e||6==e)||0<=e&&6>=e&&(0==c||6==c)||2<=c&&4>=c&&2<=e&&4>=e?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var e=d.getLostPoint(this);if(0==c||a>e)a=e,b=
+c}return b},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(a=8;a<this.moduleCount-8;a++)null==this.modules[6][a]&&(this.modules[6][a]=0==a%2)},setupPositionAdjustPattern:function(){for(var a=d.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var e=a[b],f=a[c];if(null==this.modules[e][f])for(var h=-2;2>=h;h++)for(var i=-2;2>=i;i++)this.modules[e+h][f+i]=-2==h||2==h||-2==i||2==i||0==h&&0==
+i?!0:!1}},setupTypeNumber:function(a){for(var b=d.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var e=!a&&1==(b>>c&1);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=e}for(c=0;18>c;c++)e=!a&&1==(b>>c&1),this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=e},setupTypeInfo:function(a,b){for(var c=d.getBCHTypeInfo(this.errorCorrectLevel<<3|b),e=0;15>e;e++){var f=!a&&1==(c>>e&1);6>e?this.modules[e][8]=f:8>e?this.modules[e+1][8]=f:this.modules[this.moduleCount-15+e][8]=f}for(e=0;15>e;e++)f=
+!a&&1==(c>>e&1),8>e?this.modules[8][this.moduleCount-e-1]=f:9>e?this.modules[8][15-e-1+1]=f:this.modules[8][15-e-1]=f;this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,e=this.moduleCount-1,f=7,h=0,i=this.moduleCount-1;0<i;i-=2)for(6==i&&i--;;){for(var g=0;2>g;g++)if(null==this.modules[e][i-g]){var j=!1;h<a.length&&(j=1==(a[h]>>>f&1));d.getMask(b,e,i-g)&&(j=!j);this.modules[e][i-g]=j;f--;-1==f&&(h++,f=7)}e+=c;if(0>e||this.moduleCount<=e){e-=c;c=-c;break}}}};b.PAD0=236;b.PAD1=
+17;b.createData=function(a,c,e){for(var f=r.getRSBlocks(a,c),h=new s,i=0;i<e.length;i++){var g=e[i];h.put(g.mode,4);h.put(g.getLength(),d.getLengthInBits(g.mode,a));g.write(h)}for(i=a=0;i<f.length;i++)a+=f[i].dataCount;if(h.getLengthInBits()>8*a)throw Error("code length overflow. ("+h.getLengthInBits()+">"+8*a+")");for(h.getLengthInBits()+4<=8*a&&h.put(0,4);0!=h.getLengthInBits()%8;)h.putBit(!1);for(;!(h.getLengthInBits()>=8*a);){h.put(b.PAD0,8);if(h.getLengthInBits()>=8*a)break;h.put(b.PAD1,8)}return b.createBytes(h,
+f)};b.createBytes=function(a,b){for(var c=0,e=0,f=0,h=Array(b.length),s=Array(b.length),g=0;g<b.length;g++){var j=b[g].dataCount,l=b[g].totalCount-j;e=Math.max(e,j);f=Math.max(f,l);h[g]=Array(j);for(var k=0;k<h[g].length;k++)h[g][k]=255&a.buffer[k+c];c+=j;k=d.getErrorCorrectPolynomial(l);j=(new i(h[g],k.getLength()-1)).mod(k);s[g]=Array(k.getLength()-1);for(k=0;k<s[g].length;k++)l=k+j.getLength()-s[g].length,s[g][k]=0<=l?j.get(l):0}for(k=g=0;k<b.length;k++)g+=b[k].totalCount;c=Array(g);for(k=g=0;k<
+e;k++)for(j=0;j<b.length;j++)k<h[j].length&&(c[g++]=h[j][k]);for(k=0;k<f;k++)for(j=0;j<b.length;j++)k<s[j].length&&(c[g++]=s[j][k]);return c};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],
+[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;0<=d.getBCHDigit(b)-d.getBCHDigit(d.G15);)b^=d.G15<<d.getBCHDigit(b)-d.getBCHDigit(d.G15);
+return(a<<10|b)^d.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;0<=d.getBCHDigit(b)-d.getBCHDigit(d.G18);)b^=d.G18<<d.getBCHDigit(b)-d.getBCHDigit(d.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return d.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case 0:return 0==(b+c)%2;case 1:return 0==b%2;case 2:return 0==c%3;case 3:return 0==(b+c)%3;case 4:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case 5:return 0==
+b*c%2+b*c%3;case 6:return 0==(b*c%2+b*c%3)%2;case 7:return 0==(b*c%3+(b+c)%2)%2;default:throw Error("bad maskPattern:"+a);}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;c<a;c++)b=b.multiply(new i([1,e.gexp(c)],0));return b},getLengthInBits:function(a,b){if(1<=b&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;
+case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10}else if(41>b)switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12}else throw Error("type:"+a+" / version:"+b);},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;d<b;d++)for(var e=0;e<b;e++){for(var f=0,h=a.isDark(d,e),i=-1;1>=i;i++)if(!(0>d+i||b<=d+i))for(var g=-1;1>=g;g++)0>e+g||b<=e+g||(0!=i||0!=g)&&h==a.isDark(d+i,e+g)&&f++;5<f&&(c+=3+f-5)}for(d=
+0;d<b-1;d++)for(e=0;e<b-1;e++)if(f=0,a.isDark(d,e)&&f++,a.isDark(d+1,e)&&f++,a.isDark(d,e+1)&&f++,a.isDark(d+1,e+1)&&f++,0==f||4==f)c+=3;for(d=0;d<b;d++)for(e=0;e<b-6;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(e=0;e<b;e++)for(d=0;d<b-6;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(e=f=0;e<b;e++)for(d=0;d<b;d++)a.isDark(d,
+e)&&f++;a=Math.abs(100*f/b/b-50)/5;return c+10*a}},e={glog:function(a){if(1>a)throw Error("glog("+a+")");return e.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;256<=a;)a-=255;return e.EXP_TABLE[a]},EXP_TABLE:Array(256),LOG_TABLE:Array(256)},f=0;8>f;f++)e.EXP_TABLE[f]=1<<f;for(f=8;256>f;f++)e.EXP_TABLE[f]=e.EXP_TABLE[f-4]^e.EXP_TABLE[f-5]^e.EXP_TABLE[f-6]^e.EXP_TABLE[f-8];for(f=0;255>f;f++)e.LOG_TABLE[e.EXP_TABLE[f]]=f;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},
+multiply:function(a){for(var b=Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=e.gexp(e.glog(this.get(c))+e.glog(a.get(d)));return new i(b,0)},mod:function(a){if(0>this.getLength()-a.getLength())return this;for(var b=e.glog(this.get(0))-e.glog(a.get(0)),c=Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(d=0;d<a.getLength();d++)c[d]^=e.gexp(e.glog(a.get(d))+b);return(new i(c,0)).mod(a)}};r.RS_BLOCK_TABLE=[[1,26,19],
+[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,
+101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,
+150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,
+25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],
+[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,
+74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]];r.getRSBlocks=function(a,b){var c=r.getRsBlockTable(a,b);if(void 0==c)throw Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;f<d;f++)for(var h=c[3*f+0],i=c[3*
+f+1],g=c[3*f+2],j=0;j<h;j++)e.push(new r(i,g));return e};r.getRsBlockTable=function(a,b){switch(b){case 1:return r.RS_BLOCK_TABLE[4*(a-1)+0];case 0:return r.RS_BLOCK_TABLE[4*(a-1)+1];case 3:return r.RS_BLOCK_TABLE[4*(a-1)+2];case 2:return r.RS_BLOCK_TABLE[4*(a-1)+3]}};s.prototype={get:function(a){return 1==(this.buffer[Math.floor(a/8)]>>>7-a%8&1)},put:function(a,b){for(var c=0;c<b;c++)this.putBit(1==(a>>>b-c-1&1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/
+8);this.buffer.length<=b&&this.buffer.push(0);a&&(this.buffer[b]|=128>>>this.length%8);this.length++}};return b}();
+
+        function makeQR(text, canvas, size) {
+            var qr = new QRCode(4, 0);
+            qr.addData(text);
+            qr.make();
+            var ctx = canvas.getContext('2d');
+            var moduleCount = qr.getModuleCount();
+            var cellSize = size / moduleCount;
+            canvas.width = size;
+            canvas.height = size;
+            ctx.fillStyle = '#F2EFE6';
+            ctx.fillRect(0, 0, size, size);
+            ctx.fillStyle = '#0D1617';
+            for (var row = 0; row < moduleCount; row++) {
+                for (var col = 0; col < moduleCount; col++) {
+                    if (qr.isDark(row, col)) {
+                        ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+        // === DONNÉES DES RÔLES ===
+        const ROLES = {
+            1: {
+                icon: '🎓',
+                title: "L'étudiant·e en difficulté",
+                profil: "Tu as des troubles d'apprentissage (dyslexie). L'IA est ton seul moyen de suivre le rythme.",
+                objectif: "Faire autoriser l'IA sans restriction. Pour toi, l'interdire = discrimination.",
+                arguments: [
+                    "L'IA compense ton handicap",
+                    "C'est une question d'égalité des chances",
+                    "Tu ne pollues pas plus qu'avec une voiture ou ton smartphone"
+                ],
+                ligneRouge: "Tu ne peux pas accepter une interdiction totale."
+            },
+            2: {
+                icon: '🌱',
+                title: "L'écolo convaincu·e",
+                profil: "Militant·e climat, tu as arrêté l'avion et tu es végétarien·ne. Tu as calculé que les IA génèrent autant de CO₂ que l'aviation.",
+                objectif: "Limiter drastiquement l'usage de l'IA, voire l'interdire. Chaque requête = 500ml d'eau gaspillée.",
+                arguments: [
+                    "Les datacenters IA assèchent des régions entières",
+                    "On peut apprendre sans IA comme avant",
+                    "C'est hypocrite de parler d'écologie en utilisant ChatGPT 50x/jour"
+                ],
+                ligneRouge: "Tu ne peux pas accepter un usage illimité."
+            },
+            3: {
+                icon: '👩‍🏫',
+                title: "Le/la prof pragmatique",
+                profil: "Tu enseignes depuis 15 ans. Tu vois l'IA comme un outil, ni diable ni sauveur. Tu veux juste que tes élèves apprennent vraiment.",
+                objectif: "Trouver un compromis qui permette l'apprentissage ET la responsabilité écologique.",
+                arguments: [
+                    "L'IA peut aider à apprendre... ou empêcher d'apprendre",
+                    "Il faut éduquer, pas interdire",
+                    "Comparer : 1 cours magistral de 2h pollue plus que 50 requêtes ChatGPT"
+                ],
+                ligneRouge: "Tu refuses les positions extrêmes (tout interdire OU tout autoriser)."
+            },
+            4: {
+                icon: '💻',
+                title: "Le/la geek optimiste",
+                profil: "Tu codes depuis tes 12 ans, tu maîtrises Python, les prompts avancés, tu rêves de bosser dans l'IA. Pour toi, l'IA va SAUVER la planète.",
+                objectif: "Faire accepter que l'IA est la solution écologique, pas le problème.",
+                arguments: [
+                    "L'IA optimise la consommation énergétique des bâtiments",
+                    "L'IA accélère la recherche sur les énergies renouvelables",
+                    "Interdire l'IA = se priver d'un outil pour résoudre la crise climat"
+                ],
+                ligneRouge: "Tu ne peux pas laisser passer l'idée que \"l'IA = pollution pure\"."
+            },
+            5: {
+                icon: '👔',
+                title: "Le/la responsable d'établissement",
+                profil: "Tu gères le budget, la réputation, les partenariats. L'établissement doit montrer qu'il est \"moderne\" ET \"responsable\".",
+                objectif: "Trouver une position qui fasse bien dans les journaux et sur les réseaux, sans fâcher personne.",
+                arguments: [
+                    "L'établissement doit former aux outils du futur",
+                    "Mais aussi montrer l'exemple en matière d'écologie",
+                    "Les parents et les entreprises partenaires nous regardent"
+                ],
+                ligneRouge: "Pas de décision qui fasse scandale ou qui coûte cher."
+            },
+            6: {
+                icon: '😐',
+                title: "L'étudiant·e lambda",
+                profil: "Tu utilises l'IA pour tes devoirs, tes recherches, parfois par flemme, parfois parce que c'est efficace. Tu n'y avais jamais pensé en termes d'écologie.",
+                objectif: "Garder ton confort d'usage sans culpabiliser. Tu veux juste qu'on te dise ce qui est \"raisonnable\".",
+                arguments: [
+                    "Pourquoi les élèves devraient se limiter alors que les entreprises ne le font pas ?",
+                    "Netflix pollue plus que ChatGPT, non ?",
+                    "Tu es prêt·e à faire des efforts si c'est clair et juste"
+                ],
+                ligneRouge: "Tu refuses qu'on te traite de pollueur·euse irresponsable."
+            }
+        };
+
+        const ROLE_NAMES = {
+            1: "L'étudiant·e en difficulté",
+            2: "L'écolo convaincu·e",
+            3: "Le/la prof pragmatique",
+            4: "Le/la geek optimiste",
+            5: "Le/la responsable d'établissement",
+            6: "L'étudiant·e lambda"
+        };
+
+        // === INITIALISATION ===
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roleId = urlParams.get('role');
+
+            if (roleId && ROLES[roleId]) {
+                // Mode participant : afficher uniquement le rôle
+                showParticipantView(roleId);
+            } else {
+                // Mode animateur : afficher l'interface complète
+                showAnimatorView();
+            }
+        });
+
+        function showParticipantView(roleId) {
+            const role = ROLES[roleId];
+            
+            // Masquer toutes les sections sauf mon-role
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('mon-role').classList.add('active');
+
+            // Générer le contenu du rôle
+            const container = document.getElementById('role-container');
+            container.innerHTML = `
+                <div class="role-card">
+                    <h3><span class="role-icon">${role.icon}</span> ${role.title}</h3>
+                    
+                    <div class="role-profil">
+                        <strong>👤 Ton profil :</strong><br>
+                        ${role.profil}
+                    </div>
+                    
+                    <div class="role-objectif">
+                        <strong>🎯 Ton objectif SECRET :</strong><br>
+                        ${role.objectif}
+                    </div>
+                    
+                    <div class="role-arguments">
+                        <strong>💬 Tes arguments :</strong>
+                        <ul>
+                            ${role.arguments.map(arg => `<li>${arg}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="role-ligne-rouge">
+                        <strong>🚫 Ta ligne rouge :</strong><br>
+                        ${role.ligneRouge}
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAnimatorView() {
+            // Générer les liens
+            const baseUrl = window.location.href.split('?')[0];
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`link-${i}`).value = `${baseUrl}?role=${i}`;
+            }
+
+            // Afficher la section intro
+            showSection('intro');
+        }
+
+        // === NAVIGATION ENTRE SECTIONS ===
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // === COPIER LIEN ===
+        function copyLink(roleId) {
+            const input = document.getElementById(`link-${roleId}`);
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = input.nextElementSibling;
+            btn.textContent = '✓ Copié';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = 'Copier';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // === QR CODE ===
+        function showQR(roleId) {
+            const url = document.getElementById(`link-${roleId}`).value;
+            const modal = document.getElementById('qr-modal');
+            const canvas = document.getElementById('qr-canvas');
+            const title = document.getElementById('qr-title');
+            
+            title.textContent = ROLE_NAMES[roleId];
+            makeQR(url, canvas, 200);
+            modal.classList.add('active');
+        }
+
+        function closeQR(event) {
+            if (!event || event.target.id === 'qr-modal') {
+                document.getElementById('qr-modal').classList.remove('active');
+            }
+        }
+
+        // === TIMER ===
+        let timerInterval;
+        let timeLeft = 1200; // 20 minutes
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            const elapsed = 1200 - timeLeft;
+            if (elapsed < 300) {
+                document.getElementById('phase-label').textContent = 'Tour de table';
+            } else if (elapsed < 1080) {
+                document.getElementById('phase-label').textContent = 'Débat ouvert';
+            } else {
+                document.getElementById('phase-label').textContent = 'Temps de vote';
+            }
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        alert('⏰ Temps écoulé ! Passez à la phase de vote.');
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = 1200;
+            updateTimerDisplay();
+        }
+
+        // === VOTE ===
+        let selectedVote = null;
+
+        function selectVote(element, option) {
+            document.querySelectorAll('.vote-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedVote = option;
+            
+            document.getElementById('vote-result').style.display = 'block';
+            document.getElementById('chosen-vote').textContent = option;
+        }
+
+        // Initialiser
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
